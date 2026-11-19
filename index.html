@@ -157,7 +157,7 @@ section{display:flex;flex-direction:column;gap:20px;scroll-margin-top:24px}
       <span class="meta">rbitcoin · 2026</span>
       <div><h3><a href="https://github.com/rbitcoin-org/rbitcoin/issues/1275" target="_blank" rel="noopener">Private broadcast that doesn't leak your IP ↗</a></h3>
       <p>Sending your own transaction over Tor so no one can link it to you. I closed a leak where the node could dial a clearnet peer directly, made delivery wait for the peer's pong, ended the broadcast once the network echoes the transaction back, and added retries up to Core's limit of 1,000.</p>
-      <p class="note"><b>Review and iteration:</b> on #1343, each of 3 review rounds found a new way the node could still give itself away. The review bot finished that PR as #1404.</p>
+      <p class="note"><b>Review and iteration:</b> on #1343, each of 3 review rounds found a new way the node could still give itself away. The maintainer finished it and merged it as #1404.</p>
       <p class="note"><b>Takeaway:</b> read Bitcoin Core's code first, and for every change ask whether a spy could tell my node apart from a normal one.</p>
       <div class="chips"><span class="chip">Rust</span><span class="chip">Tor</span><span class="chip">P2P</span><span class="chip">4 PRs merged</span></div></div>
     </article>
@@ -202,7 +202,7 @@ section{display:flex;flex-direction:column;gap:20px;scroll-margin-top:24px}
 
 <section id="contributions">
   <div class="label">Contributions</div>
-  <p class="prose">18 pull requests opened since September: 11 merged, 6 open, and 1 finished by the review bot. Each row shows the date I opened it.</p>
+  <p class="prose">18 pull requests opened since September: 11 merged, 6 open, and 1 finished by the maintainer and merged as another PR (#1404). Each row shows the date I opened it.</p>
   <div class="scroll tl" role="img" aria-label="Timeline from 1 September to 15 November 2026. Pull requests start with one on 12 September, one on 13 October, five on 22 October, then a steady run through 11 November. Reviews cluster on 7 October, 21 to 22 October and 11 November.">
     <svg viewBox="0 0 640 150">
       <g stroke="var(--line)"><line x1="90" y1="40" x2="630" y2="40"/><line x1="90" y1="95" x2="630" y2="95"/><line x1="90" y1="128" x2="630" y2="128"/>
@@ -218,13 +218,13 @@ section{display:flex;flex-direction:column;gap:20px;scroll-margin-top:24px}
   </div>
   <div class="groups">
     <div class="group">
-      <div class="proj-head"><h3><a href="https://github.com/rbitcoin-org/rbitcoin" target="_blank" rel="noopener">rbitcoin</a></h3><span>Rust full node · 10 merged, 1 landed through #1404</span></div>
+      <div class="proj-head"><h3><a href="https://github.com/rbitcoin-org/rbitcoin" target="_blank" rel="noopener">rbitcoin</a></h3><span>Rust full node · 10 merged, 1 merged by the maintainer as #1404</span></div>
       <ul class="prs">
         <li><span class="n"><a href="https://github.com/rbitcoin-org/rbitcoin/pull/1555" target="_blank" rel="noopener">#1555</a></span><span>Bring I2P sessions back after i2pd restarts</span><span class="d">11 Nov</span><span class="st merged">merged</span></li>
         <li><span class="n"><a href="https://github.com/rbitcoin-org/rbitcoin/pull/1515" target="_blank" rel="noopener">#1515</a></span><span>Bring onion services back after Tor restarts</span><span class="d">10 Nov</span><span class="st merged">merged</span></li>
         <li><span class="n"><a href="https://github.com/rbitcoin-org/rbitcoin/pull/1472" target="_blank" rel="noopener">#1472</a></span><span><code>--proxy</code> uses the same seed rules as a direct start</span><span class="d">9 Nov</span><span class="st merged">merged</span></li>
         <li><span class="n"><a href="https://github.com/rbitcoin-org/rbitcoin/pull/1417" target="_blank" rel="noopener">#1417</a></span><span>Send an unreturned private broadcast again</span><span class="d">5 Nov</span><span class="st merged">merged</span></li>
-        <li><span class="n"><a href="https://github.com/rbitcoin-org/rbitcoin/pull/1343" target="_blank" rel="noopener">#1343</a></span><span>A peer's echo ends the private broadcast (finished as #1404)</span><span class="d">2 Nov</span><span class="st closed">landed</span></li>
+        <li><span class="n"><a href="https://github.com/rbitcoin-org/rbitcoin/pull/1343" target="_blank" rel="noopener">#1343</a></span><span>A peer's echo ends the private broadcast (finished by the maintainer, merged as #1404)</span><span class="d">2 Nov</span><span class="st closed">landed</span></li>
         <li><span class="n"><a href="https://github.com/rbitcoin-org/rbitcoin/pull/1342" target="_blank" rel="noopener">#1342</a></span><span>Private broadcast waits for the peer's pong</span><span class="d">2 Nov</span><span class="st merged">merged</span></li>
         <li><span class="n"><a href="https://github.com/rbitcoin-org/rbitcoin/pull/1286" target="_blank" rel="noopener">#1286</a></span><span>Private broadcast never dials a peer directly</span><span class="d">28 Oct</span><span class="st merged">merged</span></li>
         <li><span class="n"><a href="https://github.com/rbitcoin-org/rbitcoin/pull/1215" target="_blank" rel="noopener">#1215</a></span><span><code>getnetworkinfo</code> lists its networks</span><span class="d">25 Oct</span><span class="st merged">merged</span></li>
