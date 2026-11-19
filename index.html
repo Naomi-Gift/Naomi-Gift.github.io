@@ -98,7 +98,15 @@ section{display:flex;flex-direction:column;gap:20px;scroll-margin-top:24px}
 .earlier span{font-size:.85rem;color:var(--muted)}
 @media (max-width:560px){.earlier{grid-template-columns:minmax(0,1fr)}}
 
-footer{color:var(--muted);font-size:.85rem;border-top:1px solid var(--line);padding-top:20px}
+.fellow{font-family:var(--mono);font-size:.76rem;color:var(--accent);margin-top:8px;letter-spacing:.02em}
+.item p.note{font-size:.9rem;margin-top:8px}
+.item p.note b{color:var(--fg);font-weight:600}
+.how{display:block;color:var(--muted);font-size:.84rem;margin-top:2px}
+.reflect{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px 32px}
+.reflect h3{font-size:1rem;font-weight:600;margin-bottom:8px}
+.reflect ul{margin:0;padding-left:18px;color:var(--muted);display:flex;flex-direction:column;gap:8px;font-size:.95rem}
+.reflect b{color:var(--fg);font-weight:600}
+@media (max-width:700px){.reflect{grid-template-columns:minmax(0,1fr)}}
 @media (prefers-reduced-motion:reduce){*{transition:none!important}}
 </style>
 <style>body{margin:0}</style>
@@ -111,6 +119,7 @@ footer{color:var(--muted);font-size:.85rem;border-top:1px solid var(--line);padd
   <div>
     <h1 class="name">Naomi Gift</h1>
     <p class="role">Bitcoin open-source developer</p>
+    <p class="fellow">Btrust Builders Open Source Fellowship 2026</p>
   </div>
   <p class="bio">I write and review code for Bitcoin nodes, wallets and Lightning. Most of my time goes to privacy: Tor, I2P and keeping a node's IP out of its transactions.</p>
   <nav aria-label="Sections"><ul>
@@ -119,6 +128,7 @@ footer{color:var(--muted);font-size:.85rem;border-top:1px solid var(--line);padd
     <li><a href="#contributions">Contributions</a></li>
     <li><a href="#reviews">Reviews</a></li>
     <li><a href="#writing">Writing</a></li>
+    <li><a href="#reflection">Reflection</a></li>
   </ul></nav>
   <div class="links"><a href="https://github.com/Naomi-Gift" target="_blank" rel="noopener">GitHub ↗</a><a href="https://github.com/pulls?q=author%3ANaomi-Gift+is%3Apr" target="_blank" rel="noopener">All pull requests ↗</a></div>
 </aside>
@@ -147,24 +157,32 @@ footer{color:var(--muted);font-size:.85rem;border-top:1px solid var(--line);padd
       <span class="meta">rbitcoin · 2026</span>
       <div><h3><a href="https://github.com/rbitcoin-org/rbitcoin/issues/1275" target="_blank" rel="noopener">Private broadcast that doesn't leak your IP ↗</a></h3>
       <p>Sending your own transaction over Tor so no one can link it to you. I closed a leak where the node could dial a clearnet peer directly, made delivery wait for the peer's pong, ended the broadcast once the network echoes the transaction back, and added retries up to Core's limit of 1,000.</p>
+      <p class="note"><b>Review and iteration:</b> on #1343, each of 3 review rounds found a new way the node could still give itself away. The review bot finished that PR as #1404.</p>
+      <p class="note"><b>Takeaway:</b> read Bitcoin Core's code first, and for every change ask whether a spy could tell my node apart from a normal one.</p>
       <div class="chips"><span class="chip">Rust</span><span class="chip">Tor</span><span class="chip">P2P</span><span class="chip">4 PRs merged</span></div></div>
     </article>
     <article class="item">
       <span class="meta">rbitcoin · 2026</span>
       <div><h3><a href="https://github.com/rbitcoin-org/rbitcoin/pull/1515" target="_blank" rel="noopener">Onion and I2P services that survive restarts ↗</a></h3>
       <p>When Tor or i2pd restarted, the node's hidden addresses died until a manual restart. Now the node notices, stops announcing the dead address, reconnects with Core's backoff and restores every service. Tested against real Tor, real i2pd and Bitcoin Core 29.</p>
+      <p class="note"><b>Review and iteration:</b> each PR took 4 rounds. Part of that was my tests waiting 1 to 2.6 seconds on the real clock, which made them slow and flaky.</p>
+      <p class="note"><b>Takeaway:</b> fake the clock in tests, and check exact numbers instead of "it happened eventually".</p>
       <div class="chips"><span class="chip">Rust</span><span class="chip">Tor control</span><span class="chip">I2P SAM</span><span class="chip">2 PRs merged</span></div></div>
     </article>
     <article class="item">
       <span class="meta">Bitcoin Core · 2026</span>
       <div><h3><a href="https://github.com/bitcoin/bitcoin/pull/36614" target="_blank" rel="noopener">Tests that kill surviving mutants in coin selection ↗</a></h3>
       <p>A mutant is a small bug put in on purpose. If every test still passes, that line is unguarded. I wrote tests for four of them, including one where the wallet would add a fee discount instead of subtracting it and overpay.</p>
+      <p class="note"><b>Review and iteration:</b> a maintainer asked me to fold my second PR into this one and to show the diff of each mutant. I did both, and two reviewers then confirmed every mutant was killed.</p>
+      <p class="note"><b>Takeaway:</b> make a PR easy to check. Show the exact bug the test catches, and keep related work in one place.</p>
       <div class="chips"><span class="chip">C++</span><span class="chip">wallet</span><span class="chip">2 ACKs</span></div></div>
     </article>
     <article class="item">
       <span class="meta">BDK · 2026</span>
       <div><h3><a href="https://github.com/bitcoindevkit/bdk_wallet/pull/546" target="_blank" rel="noopener">A wallet that checks the signatures it finalizes ↗</a></h3>
       <p>BDK skipped signing an input that already had a signature, without checking it, so a PSBT could finalize with an invalid one. The wallet now always writes a fresh, verified signature for ECDSA and both Taproot paths.</p>
+      <p class="note"><b>Review and iteration:</b> a reviewer tested it and gave a tested ACK, and asked me to sign my commits.</p>
+      <p class="note"><b>Takeaway:</b> wallet bugs often hide in shortcuts. Trusting data the wallet didn't make itself is one of them.</p>
       <div class="chips"><span class="chip">Rust</span><span class="chip">PSBT</span><span class="chip">Taproot</span><span class="chip">tACK</span></div></div>
     </article>
     <article class="item">
@@ -244,13 +262,13 @@ footer{color:var(--muted);font-size:.85rem;border-top:1px solid var(--line);padd
   <div class="label">Reviews</div>
   <p class="prose">7 pull requests by other people that I reviewed. These are not counted in the 18 above. A tested ACK means I ran the change myself, usually by undoing the fix and checking that the new test fails.</p>
   <ul class="prs">
-    <li><span class="n"><a href="https://github.com/bitcoin/bitcoin/pull/36825" target="_blank" rel="noopener">#36825</a></span><span>Core · wallet migration with watch-only transactions</span><span class="d">11 Nov</span><span class="st tack">tACK</span></li>
-    <li><span class="n"><a href="https://github.com/bitcoin/bitcoin/pull/36599" target="_blank" rel="noopener">#36599</a></span><span>Core · intermittent timeout waiting for a getdata</span><span class="d">22 Oct</span><span class="st tack">tACK</span></li>
-    <li><span class="n"><a href="https://github.com/bitcoin/bitcoin/pull/36536" target="_blank" rel="noopener">#36536</a></span><span>Core · escape control characters in log messages</span><span class="d">22 Oct</span><span class="st tack">tACK</span></li>
-    <li><span class="n"><a href="https://github.com/bitcoin/bitcoin/pull/36591" target="_blank" rel="noopener">#36591</a></span><span>Core · deduplicate PSBT unknown-field tests</span><span class="d">21 Oct</span><span class="st tack">tACK</span></li>
-    <li><span class="n"><a href="https://github.com/bitcoin/bitcoin/pull/36438" target="_blank" rel="noopener">#36438</a></span><span>Core · eviction after a switch to tx relay via filterclear</span><span class="d">7 Oct</span><span class="st tack">tACK</span></li>
-    <li><span class="n"><a href="https://github.com/bitcoin/bitcoin/pull/36441" target="_blank" rel="noopener">#36441</a></span><span>Core · upgrade docs for the bitcoin wrapper</span><span class="d">7 Oct</span><span class="st tack">ACK</span></li>
-    <li><span class="n"><a href="https://github.com/bitcoindevkit/bdk_wallet/pull/585" target="_blank" rel="noopener">#585</a></span><span>BDK · coin selection early return when change can't pay its fee</span><span class="d">7 Oct</span><span class="st closed">review</span></li>
+    <li><span class="n"><a href="https://github.com/bitcoin/bitcoin/pull/36825" target="_blank" rel="noopener">#36825</a></span><span>Core · wallet migration with watch-only transactions<span class="how">Ran both tests with and without the fix: they pass with it and fail without it. Left 2 style nits.</span></span><span class="d">11 Nov</span><span class="st tack">tACK</span></li>
+    <li><span class="n"><a href="https://github.com/bitcoin/bitcoin/pull/36599" target="_blank" rel="noopener">#36599</a></span><span>Core · intermittent timeout waiting for a getdata<span class="how">Added the 99 ms sleep from the description: the old test timed out, the new one passed.</span></span><span class="d">22 Oct</span><span class="st tack">tACK</span></li>
+    <li><span class="n"><a href="https://github.com/bitcoin/bitcoin/pull/36536" target="_blank" rel="noopener">#36536</a></span><span>Core · escape control characters in log messages<span class="how">Built it and ran the new log escaping test.</span></span><span class="d">22 Oct</span><span class="st tack">tACK</span></li>
+    <li><span class="n"><a href="https://github.com/bitcoin/bitcoin/pull/36591" target="_blank" rel="noopener">#36591</a></span><span>Core · deduplicate PSBT unknown-field tests<span class="how">Deleted 3 lines of <code>psbt.cpp</code> one at a time. The new test caught each one.</span></span><span class="d">21 Oct</span><span class="st tack">tACK</span></li>
+    <li><span class="n"><a href="https://github.com/bitcoin/bitcoin/pull/36438" target="_blank" rel="noopener">#36438</a></span><span>Core · eviction after a switch to tx relay via filterclear<span class="how">Removed the disconnect call in the <code>filterclear</code> handler, and the new check failed.</span></span><span class="d">7 Oct</span><span class="st tack">tACK</span></li>
+    <li><span class="n"><a href="https://github.com/bitcoin/bitcoin/pull/36441" target="_blank" rel="noopener">#36441</a></span><span>Core · upgrade docs for the bitcoin wrapper<span class="how">Read the docs change against how the wrapper works.</span></span><span class="d">7 Oct</span><span class="st tack">ACK</span></li>
+    <li><span class="n"><a href="https://github.com/bitcoindevkit/bdk_wallet/pull/585" target="_blank" rel="noopener">#585</a></span><span>BDK · coin selection early return when change can't pay its fee<span class="how">4 review comments on the coin selection logic.</span></span><span class="d">7 Oct</span><span class="st closed">review</span></li>
   </ul>
 </section>
 
@@ -286,6 +304,23 @@ footer{color:var(--muted);font-size:.85rem;border-top:1px solid var(--line);padd
   </div>
 </section>
 
+<section id="reflection">
+  <div class="label">Reflection and what's next</div>
+  <div class="reflect">
+    <div><h3>What I learnt</h3><ul>
+      <li><b>Read the reference first.</b> Most of my review rounds in rbitcoin came from cases Bitcoin Core already handles. Now I read Core's code before I write mine.</li>
+      <li><b>A test only counts if it fails without the fix.</b> I check this in my own PRs and in every review I do.</li>
+      <li><b>Privacy leaks hide in behaviour.</b> A node can give itself away by what it sends, when it sends it, and what it never says.</li>
+      <li><b>Small PRs move faster.</b> One clear change with one clear test gets reviewed. A big one gets questions.</li>
+    </ul></div>
+    <div><h3>What's next</h3><ul>
+      <li>Get my open Bitcoin Core PRs (#36614, #36795, #36840) and Core Lightning #9655 through review.</li>
+      <li>Keep owning Tor, I2P and private broadcast in rbitcoin, starting with restart tests against real Tor and i2pd.</li>
+      <li>Review more Bitcoin Core PRs, always with a tested ACK.</li>
+      <li>Write one article for each main piece of work.</li>
+    </ul></div>
+  </div>
+</section>
 
 </main>
 </div>
