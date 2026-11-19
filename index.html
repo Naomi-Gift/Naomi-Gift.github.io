@@ -1,0 +1,274 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Naomi Gift</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<style>
+/* Layout: two columns on desktop. A fixed identity column (name, bio, nav, links) and a scrolling column of work. One column on phones. */
+:root{
+  --bg:#F4F5F8; --surface:#FFFFFF; --fg:#151923; --muted:#5A6172; --line:#D7DBE4;
+  --accent:#3A45A5; --accent-soft:#E2E5F6; --amber:#9A6A10; --amber-soft:#F4E9D2; --ok:#1E7A55; --ok-soft:#DCEFE6;
+  --display:"Schibsted Grotesk", "Helvetica Neue", system-ui, sans-serif;
+  --body:"Schibsted Grotesk", "Helvetica Neue", system-ui, sans-serif;
+  --mono:"IBM Plex Mono", ui-monospace, Menlo, monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#0F121A; --surface:#161A24; --fg:#E7E9F0; --muted:#9BA2B4; --line:#262C3A;
+  --accent:#A3ACFF; --accent-soft:#232A4D; --amber:#E2B65E; --amber-soft:#3A2F18; --ok:#6BCF9F; --ok-soft:#173528; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0F121A; --surface:#161A24; --fg:#E7E9F0; --muted:#9BA2B4; --line:#262C3A;
+  --accent:#A3ACFF; --accent-soft:#232A4D; --amber:#E2B65E; --amber-soft:#3A2F18; --ok:#6BCF9F; --ok-soft:#173528; color-scheme:dark}
+body{background:var(--bg);color:var(--fg);font:16px/1.6 var(--body)}
+a{color:inherit;text-decoration-color:var(--line);text-underline-offset:3px}
+a:hover{color:var(--accent);text-decoration-color:var(--accent)}
+a:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:2px}
+code{font-family:var(--mono);font-size:.84em}
+p{margin:0}
+h1,h2,h3{margin:0;font-family:var(--display);text-wrap:balance;line-height:1.15}
+
+.page{max-width:1120px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));display:grid;grid-template-columns:minmax(0,360px) minmax(0,1fr);gap:64px}
+@media (max-width:900px){.page{grid-template-columns:minmax(0,1fr);gap:24px}}
+
+.side{position:sticky;top:env(safe-area-inset-top,0px);align-self:start;padding-block:72px 40px;display:flex;flex-direction:column;gap:28px;max-height:100vh;box-sizing:border-box}
+@media (max-width:900px){.side{position:static;max-height:none;padding-block:48px 0}}
+.name{font-size:clamp(2.6rem,5vw,3.4rem);font-weight:800;letter-spacing:-.03em}
+.role{font-size:1.15rem;font-weight:600;color:var(--fg);margin-top:6px}
+.bio{color:var(--muted);max-width:34ch}
+.now{display:flex;gap:10px;align-items:flex-start;font-size:.9rem;padding:12px 14px;border:1px solid var(--line);border-radius:8px;background:var(--surface);max-width:34ch}
+.now .dot{flex:none;width:8px;height:8px;border-radius:50%;background:var(--ok);margin-top:8px;box-shadow:0 0 0 4px var(--ok-soft)}
+.now b{font-weight:600}
+nav ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:4px}
+nav a{display:inline-flex;align-items:center;gap:12px;font-family:var(--mono);font-size:.78rem;letter-spacing:.1em;text-transform:uppercase;text-decoration:none;color:var(--muted);padding:4px 0}
+nav a::before{content:"";width:24px;height:1px;background:currentColor;transition:width .2s}
+nav a:hover::before{width:48px}
+@media (max-width:900px){nav{display:none}}
+.links{display:flex;flex-wrap:wrap;gap:8px 18px;font-family:var(--mono);font-size:.82rem}
+.links a{text-decoration:none;color:var(--muted)}
+.links a:hover{color:var(--accent)}
+
+main{padding-block:72px 80px;display:flex;flex-direction:column;gap:72px;min-width:0}
+@media (max-width:900px){main{padding-block:16px 64px;gap:56px}}
+section{display:flex;flex-direction:column;gap:20px;scroll-margin-top:24px}
+.label{font-family:var(--mono);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);display:flex;align-items:center;gap:12px}
+.label::after{content:"";flex:1;height:1px;background:var(--line)}
+.prose{display:flex;flex-direction:column;gap:14px;color:var(--muted);max-width:62ch}
+.prose b{color:var(--fg);font-weight:600}
+
+.skills{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px 28px}
+.skills div{display:flex;flex-direction:column;gap:6px}
+.skills h3{font-size:.95rem;font-weight:600}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{font-family:var(--mono);font-size:.74rem;padding:2px 8px;border-radius:4px;background:var(--accent-soft);color:var(--accent)}
+@media (max-width:560px){.skills{grid-template-columns:minmax(0,1fr)}}
+
+.work{display:flex;flex-direction:column;gap:8px}
+.item{display:grid;grid-template-columns:110px minmax(0,1fr);gap:4px 20px;padding:18px;margin-inline:-18px;border-radius:10px;transition:background .15s}
+.item:hover{background:var(--surface)}
+.item .meta{font-family:var(--mono);font-size:.74rem;color:var(--muted);letter-spacing:.04em;padding-top:4px;text-transform:uppercase}
+.item h3{font-size:1.08rem;font-weight:600}
+.item h3 a{text-decoration:none}
+.item p{color:var(--muted);font-size:.95rem;margin-top:6px}
+.item .chips{margin-top:10px}
+@media (max-width:560px){.item{grid-template-columns:minmax(0,1fr);padding:14px;margin-inline:-14px}}
+
+.proj-head{display:flex;align-items:baseline;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.proj-head h3{font-size:1.05rem}
+.proj-head span{font-family:var(--mono);font-size:.76rem;color:var(--muted)}
+.prs{list-style:none;margin:0;padding:0;border-top:1px solid var(--line)}
+.prs li{display:grid;grid-template-columns:72px minmax(0,1fr) auto;gap:12px;padding:9px 0;border-bottom:1px solid var(--line);font-size:.92rem;align-items:baseline}
+.prs .n{font-family:var(--mono);font-size:.8rem;color:var(--muted)}
+.prs .n a{text-decoration:none}
+.st{font-family:var(--mono);font-size:.7rem;padding:1px 7px;border-radius:4px;white-space:nowrap}
+.st.merged{background:var(--ok-soft);color:var(--ok)} .st.open{background:var(--accent-soft);color:var(--accent)} .st.closed{background:var(--line);color:var(--muted)} .st.tack{background:var(--amber-soft);color:var(--amber)}
+.group{display:flex;flex-direction:column;gap:10px}
+.groups{display:flex;flex-direction:column;gap:32px}
+
+.earlier{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1px;background:var(--line);border:1px solid var(--line);border-radius:10px;overflow:hidden}
+.earlier div{background:var(--surface);padding:16px;display:flex;flex-direction:column;gap:4px}
+.earlier b{font-size:1.6rem;font-weight:800;font-variant-numeric:tabular-nums;line-height:1.1}
+.earlier span{font-size:.85rem;color:var(--muted)}
+@media (max-width:560px){.earlier{grid-template-columns:minmax(0,1fr)}}
+
+footer{color:var(--muted);font-size:.85rem;border-top:1px solid var(--line);padding-top:20px}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+<style>body{margin:0}</style>
+</head>
+<body>
+
+<div class="page">
+
+<aside class="side">
+  <div>
+    <h1 class="name">Naomi Gift</h1>
+    <p class="role">Bitcoin open-source developer</p>
+  </div>
+  <p class="bio">I write and review code for Bitcoin nodes, wallets and Lightning. Most of my time goes to privacy: Tor, I2P and keeping a node's IP out of its transactions.</p>
+  <nav aria-label="Sections"><ul>
+    <li><a href="#about">About</a></li>
+    <li><a href="#work">Selected work</a></li>
+    <li><a href="#contributions">Contributions</a></li>
+    <li><a href="#reviews">Reviews</a></li>
+    <li><a href="#writing">Writing</a></li>
+  </ul></nav>
+  <div class="links"><a href="https://github.com/Naomi-Gift">GitHub ↗</a><a href="https://github.com/pulls?q=author%3ANaomi-Gift+is%3Apr">All pull requests ↗</a></div>
+</aside>
+
+<main>
+
+<section id="about">
+  <div class="label">About</div>
+  <div class="prose">
+    <p>I am a <b>Btrust fellow</b> working on Bitcoin's open-source software full time.</p>
+    <p>Since September I have opened <b>22 pull requests in five Bitcoin projects</b>: rbitcoin, Bitcoin Core, Core Lightning, BDK and fungi. <b>11 are merged and 6 are in review.</b> I have reviewed and tested <b>7 pull requests</b> in Bitcoin Core and BDK, and written <b>5 articles</b> on Bitcoin and Lightning.</p>
+    <p>I work test-first. Before I fix a bug I write a test that fails, and when I review I put the bug back to check that the test notices.</p>
+  </div>
+  <div class="skills">
+    <div><h3>Languages</h3><div class="chips"><span class="chip">Rust</span><span class="chip">C++</span><span class="chip">C</span><span class="chip">Python</span></div></div>
+    <div><h3>Bitcoin</h3><div class="chips"><span class="chip">P2P protocol</span><span class="chip">JSON-RPC</span><span class="chip">PSBT</span><span class="chip">coin selection</span><span class="chip">descriptors</span></div></div>
+    <div><h3>Privacy networks</h3><div class="chips"><span class="chip">Tor control</span><span class="chip">SOCKS5</span><span class="chip">I2P SAM</span><span class="chip">private broadcast</span></div></div>
+    <div><h3>Testing</h3><div class="chips"><span class="chip">test-first</span><span class="chip">mutation testing</span><span class="chip">functional tests</span><span class="chip">tokio</span></div></div>
+  </div>
+</section>
+
+<section id="work">
+  <div class="label">Selected work</div>
+  <div class="work">
+    <article class="item">
+      <span class="meta">rbitcoin · 2026</span>
+      <div><h3><a href="https://github.com/rbitcoin-org/rbitcoin/issues/1275">Private broadcast that doesn't leak your IP ↗</a></h3>
+      <p>Sending your own transaction over Tor so no one can link it to you. I closed a leak where the node could dial a clearnet peer directly, made delivery wait for the peer's pong, ended the broadcast once the network echoes the transaction back, and added retries up to Core's limit of 1,000.</p>
+      <div class="chips"><span class="chip">Rust</span><span class="chip">Tor</span><span class="chip">P2P</span><span class="chip">4 PRs merged</span></div></div>
+    </article>
+    <article class="item">
+      <span class="meta">rbitcoin · 2026</span>
+      <div><h3><a href="https://github.com/rbitcoin-org/rbitcoin/pull/1515">Onion and I2P services that survive restarts ↗</a></h3>
+      <p>When Tor or i2pd restarted, the node's hidden addresses died until a manual restart. Now the node notices, stops announcing the dead address, reconnects with Core's backoff and restores every service. Tested against real Tor, real i2pd and Bitcoin Core 29.</p>
+      <div class="chips"><span class="chip">Rust</span><span class="chip">Tor control</span><span class="chip">I2P SAM</span><span class="chip">2 PRs merged</span></div></div>
+    </article>
+    <article class="item">
+      <span class="meta">Bitcoin Core · 2026</span>
+      <div><h3><a href="https://github.com/bitcoin/bitcoin/pull/36614">Tests that kill surviving mutants in coin selection ↗</a></h3>
+      <p>A mutant is a small bug put in on purpose. If every test still passes, that line is unguarded. I wrote tests for four of them, including one where the wallet would add a fee discount instead of subtracting it and overpay.</p>
+      <div class="chips"><span class="chip">C++</span><span class="chip">wallet</span><span class="chip">2 ACKs</span></div></div>
+    </article>
+    <article class="item">
+      <span class="meta">BDK · 2026</span>
+      <div><h3><a href="https://github.com/bitcoindevkit/bdk_wallet/pull/546">A wallet that checks the signatures it finalizes ↗</a></h3>
+      <p>BDK skipped signing an input that already had a signature, without checking it, so a PSBT could finalize with an invalid one. The wallet now always writes a fresh, verified signature for ECDSA and both Taproot paths.</p>
+      <div class="chips"><span class="chip">Rust</span><span class="chip">PSBT</span><span class="chip">Taproot</span><span class="chip">tACK</span></div></div>
+    </article>
+    <article class="item">
+      <span class="meta">Core Lightning · 2026</span>
+      <div><h3><a href="https://github.com/ElementsProject/lightning/pull/9655">A first gossip sync that finishes ↗</a></h3>
+      <p>A fresh Lightning node could stop syncing early and never learn the network's channels. I checked the three reported causes against master. All three held, and one PR fixes them.</p>
+      <div class="chips"><span class="chip">C</span><span class="chip">Lightning</span><span class="chip">gossip</span></div></div>
+    </article>
+    <article class="item">
+      <span class="meta">rbitcoin · 2026</span>
+      <div><h3><a href="https://github.com/rbitcoin-org/rbitcoin/pull/1176">RPC answers that match Bitcoin Core ↗</a></h3>
+      <p>Wallets and explorers break when a node answers differently from Core. I added Core's output descriptors to six RPC calls, fixed error codes, and made <code>getnetworkinfo</code> report the networks the node really uses.</p>
+      <div class="chips"><span class="chip">Rust</span><span class="chip">JSON-RPC</span><span class="chip">descriptors</span><span class="chip">4 PRs merged</span></div></div>
+    </article>
+  </div>
+</section>
+
+<section id="contributions">
+  <div class="label">Contributions</div>
+  <div class="groups">
+    <div class="group">
+      <div class="proj-head"><h3><a href="https://github.com/rbitcoin-org/rbitcoin">rbitcoin</a></h3><span>Rust full node · 10 merged</span></div>
+      <ul class="prs">
+        <li><span class="n"><a href="https://github.com/rbitcoin-org/rbitcoin/pull/1555">#1555</a></span><span>Bring I2P sessions back after i2pd restarts</span><span class="st merged">merged</span></li>
+        <li><span class="n"><a href="https://github.com/rbitcoin-org/rbitcoin/pull/1515">#1515</a></span><span>Bring onion services back after Tor restarts</span><span class="st merged">merged</span></li>
+        <li><span class="n"><a href="https://github.com/rbitcoin-org/rbitcoin/pull/1472">#1472</a></span><span><code>--proxy</code> uses the same seed rules as a direct start</span><span class="st merged">merged</span></li>
+        <li><span class="n"><a href="https://github.com/rbitcoin-org/rbitcoin/pull/1417">#1417</a></span><span>Send an unreturned private broadcast again</span><span class="st merged">merged</span></li>
+        <li><span class="n"><a href="https://github.com/rbitcoin-org/rbitcoin/pull/1343">#1343</a></span><span>A peer's echo ends the private broadcast (finished as #1404)</span><span class="st closed">landed</span></li>
+        <li><span class="n"><a href="https://github.com/rbitcoin-org/rbitcoin/pull/1342">#1342</a></span><span>Private broadcast waits for the peer's pong</span><span class="st merged">merged</span></li>
+        <li><span class="n"><a href="https://github.com/rbitcoin-org/rbitcoin/pull/1286">#1286</a></span><span>Private broadcast never dials a peer directly</span><span class="st merged">merged</span></li>
+        <li><span class="n"><a href="https://github.com/rbitcoin-org/rbitcoin/pull/1215">#1215</a></span><span><code>getnetworkinfo</code> lists its networks</span><span class="st merged">merged</span></li>
+        <li><span class="n"><a href="https://github.com/rbitcoin-org/rbitcoin/pull/1176">#1176</a></span><span><code>scriptPubKey</code> carries Core's inferred descriptor</span><span class="st merged">merged</span></li>
+        <li><span class="n"><a href="https://github.com/rbitcoin-org/rbitcoin/pull/1145">#1145</a></span><span><code>getrawtransaction</code> for an unknown txid is error -5</span><span class="st merged">merged</span></li>
+        <li><span class="n"><a href="https://github.com/rbitcoin-org/rbitcoin/pull/1144">#1144</a></span><span><code>gettxout</code> reports the script type and address</span><span class="st merged">merged</span></li>
+      </ul>
+    </div>
+    <div class="group">
+      <div class="proj-head"><h3><a href="https://github.com/bitcoin/bitcoin">Bitcoin Core</a></h3><span>C++ · 3 open</span></div>
+      <ul class="prs">
+        <li><span class="n"><a href="https://github.com/bitcoin/bitcoin/pull/36840">#36840</a></span><span>Test: Knapsack skips overweight groups</span><span class="st open">open</span></li>
+        <li><span class="n"><a href="https://github.com/bitcoin/bitcoin/pull/36795">#36795</a></span><span>IPC: accept <code>max-connections</code> on a bare unix <code>-ipcbind</code></span><span class="st open">open</span></li>
+        <li><span class="n"><a href="https://github.com/bitcoin/bitcoin/pull/36614">#36614</a></span><span>Test: cover <code>Merge</code>, <code>GetTotalBumpFees</code> and <code>EligibleForSpending</code></span><span class="st open">open</span></li>
+      </ul>
+    </div>
+    <div class="group">
+      <div class="proj-head"><h3><a href="https://github.com/ElementsProject/lightning">Core Lightning</a></h3><span>C · 2 open</span></div>
+      <ul class="prs">
+        <li><span class="n"><a href="https://github.com/ElementsProject/lightning/pull/9655">#9655</a></span><span>gossipd: don't cut the initial gossip sync short</span><span class="st open">open</span></li>
+        <li><span class="n"><a href="https://github.com/ElementsProject/lightning/pull/9654">#9654</a></span><span>splice: support <code>splicein &lt;channel&gt; all</code></span><span class="st open">open</span></li>
+      </ul>
+    </div>
+    <div class="group">
+      <div class="proj-head"><h3>BDK and fungi</h3><span>Rust · 1 open, 1 merged</span></div>
+      <ul class="prs">
+        <li><span class="n"><a href="https://github.com/bitcoindevkit/bdk_wallet/pull/546">BDK #546</a></span><span>Don't finalize unchecked pre-seeded signatures</span><span class="st open">open</span></li>
+        <li><span class="n"><a href="https://github.com/fungi-protocol/fungi/pull/142">fungi #142</a></span><span>Store batches and their intents as sets</span><span class="st merged">merged</span></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section id="reviews">
+  <div class="label">Reviews</div>
+  <p class="prose">A tested ACK means I ran the change myself, usually by undoing the fix and checking that the new test fails.</p>
+  <ul class="prs">
+    <li><span class="n"><a href="https://github.com/bitcoin/bitcoin/pull/36825">#36825</a></span><span>Core · wallet migration with watch-only transactions</span><span class="st tack">tACK</span></li>
+    <li><span class="n"><a href="https://github.com/bitcoin/bitcoin/pull/36599">#36599</a></span><span>Core · intermittent timeout waiting for a getdata</span><span class="st tack">tACK</span></li>
+    <li><span class="n"><a href="https://github.com/bitcoin/bitcoin/pull/36536">#36536</a></span><span>Core · escape control characters in log messages</span><span class="st tack">tACK</span></li>
+    <li><span class="n"><a href="https://github.com/bitcoin/bitcoin/pull/36591">#36591</a></span><span>Core · deduplicate PSBT unknown-field tests</span><span class="st tack">tACK</span></li>
+    <li><span class="n"><a href="https://github.com/bitcoin/bitcoin/pull/36438">#36438</a></span><span>Core · eviction after a switch to tx relay via filterclear</span><span class="st tack">tACK</span></li>
+    <li><span class="n"><a href="https://github.com/bitcoin/bitcoin/pull/36441">#36441</a></span><span>Core · upgrade docs for the bitcoin wrapper</span><span class="st tack">ACK</span></li>
+    <li><span class="n"><a href="https://github.com/bitcoindevkit/bdk_wallet/pull/585">#585</a></span><span>BDK · coin selection early return when change can't pay its fee</span><span class="st closed">review</span></li>
+  </ul>
+</section>
+
+<section id="writing">
+  <div class="label">Writing</div>
+  <p class="prose">I write to understand the code I work on. Each piece explains one part of Bitcoin or Lightning in plain words.</p>
+  <div class="work">
+    <article class="item">
+      <span class="meta">Medium</span>
+      <div><h3><a href="https://medium.com/@Naomi-Gift/did-you-know-your-bitcoin-node-can-give-you-away-by-staying-quiet-56f18d1cca36">Did you know your Bitcoin node can give you away by staying quiet? ↗</a></h3>
+      <p>How a node that never mentions its own transaction stands out to a spy, and why private broadcast has to end by acting like every other node.</p></div>
+    </article>
+    <article class="item">
+      <span class="meta">HackMD</span>
+      <div><h3><a href="https://hackmd.io/@xZ4BOZ5TTTy1I0ZQHXFOkg/BJGK94z6fe">Coin selection: how a Bitcoin wallet chooses which coins to spend ↗</a></h3>
+      <p>Eligibility filters, effective value, Branch and Bound, CoinGrinder, Knapsack and Single Random Draw, and how Bitcoin Core scores each result by waste.</p></div>
+    </article>
+    <article class="item">
+      <span class="meta">HackMD</span>
+      <div><h3><a href="https://hackmd.io/@xZ4BOZ5TTTy1I0ZQHXFOkg/B17EREp5fx">What happens when Bitcoin Core receives a new block? ↗</a></h3>
+      <p>From the P2P layer through staged validation, the block index, choosing the chain with the most work, and how reorgs use undo data.</p></div>
+    </article>
+    <article class="item">
+      <span class="meta">HackMD</span>
+      <div><h3><a href="https://hackmd.io/@xZ4BOZ5TTTy1I0ZQHXFOkg/SyhUM7iKGl">How LND uses past HTLC attempts to estimate payment success ↗</a></h3>
+      <p>How Mission Control stores past payment results and how the Apriori estimator turns them into per-hop success odds, with time decay and amount effects.</p></div>
+    </article>
+    <article class="item">
+      <span class="meta">DEV · Sep</span>
+      <div><h3><a href="https://dev.to/writtenbynaomi/bitcoin-doesnt-eliminate-trust-it-changes-what-we-trust-2c23">Bitcoin doesn't eliminate trust: it changes what we trust ↗</a></h3>
+      <p>Consensus rules, proof of work, the P2P network, eclipse attacks, pruning, SegWit and Taproot, and what each one lets a user check for themselves.</p></div>
+    </article>
+  </div>
+</section>
+
+
+</main>
+</div>
+</body>
+</html>
