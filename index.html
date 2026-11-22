@@ -139,7 +139,7 @@ section{display:flex;flex-direction:column;gap:20px;scroll-margin-top:24px}
   <div class="label">About</div>
   <div class="prose">
     <p>I am a <b>software developer and open source contributor</b> in Bitcoin. I have worked on <b>wallets, nodes and Lightning</b>, and my current priority is <b>privacy</b>: helping nodes run over Tor, I2P and cjdns, and send their own transactions without revealing their IP address.</p>
-    <p>Since September 2026 I have worked on this full time and opened <b>18 pull requests in five Bitcoin projects</b>: rbitcoin, Bitcoin Core, Core Lightning, BDK and fungi. <b>11 are merged and 6 are in review.</b> I have reviewed and tested <b>7 pull requests</b> in Bitcoin Core and BDK, and written <b>5 articles</b> on Bitcoin and Lightning.</p>
+    <p>Since September 2026 I have worked on this full time and opened <b>19 pull requests in five Bitcoin projects</b>: rbitcoin, Bitcoin Core, Core Lightning, BDK and fungi. <b>12 are merged and 6 are in review.</b> I have reviewed and tested <b>7 pull requests</b> in Bitcoin Core and BDK, and written <b>5 articles</b> on Bitcoin and Lightning.</p>
   </div>
   <div class="skills">
     <div><h3>Languages</h3><div class="chips"><span class="chip">Rust</span><span class="chip">C++</span><span class="chip">C</span><span class="chip">Python</span></div></div>
@@ -163,15 +163,15 @@ section{display:flex;flex-direction:column;gap:20px;scroll-margin-top:24px}
     <article class="item">
       <span class="meta">rbitcoin · 2026</span>
       <div><h3><a href="https://github.com/rbitcoin-org/rbitcoin/pull/1515" target="_blank" rel="noopener">Onion and I2P services that survive restarts ↗</a></h3>
-      <p>When Tor or i2pd restarted, the node's hidden addresses died until a manual restart. Now the node notices, stops announcing the dead address, reconnects with Core's backoff and restores every service. Tested against real Tor, real i2pd and Bitcoin Core 29.</p>
+      <p>When Tor or i2pd restarted, the node's hidden addresses died until a manual restart. Now the node notices, stops announcing the dead address, reconnects with Core's backoff and restores every service. Tested against real Tor, real i2pd and Bitcoin Core 29, and #1740 adds tests that restart each daemon under a running node.</p>
       <p class="note"><b>Review and iteration:</b> each PR took 4 rounds. Part of that was my tests waiting 1 to 2.6 seconds on the real clock, which made them slow and flaky.</p>
       <p class="note"><b>Takeaway:</b> fake the clock in tests, and check exact numbers instead of "it happened eventually".</p>
-      <div class="chips"><span class="chip">Rust</span><span class="chip">Tor control</span><span class="chip">I2P SAM</span><span class="chip">2 PRs merged</span></div></div>
+      <div class="chips"><span class="chip">Rust</span><span class="chip">Tor control</span><span class="chip">I2P SAM</span><span class="chip">3 PRs merged</span></div></div>
     </article>
     <article class="item">
       <span class="meta">Bitcoin Core · 2026</span>
       <div><h3><a href="https://github.com/bitcoin/bitcoin/pull/36614" target="_blank" rel="noopener">Tests that kill surviving mutants in coin selection ↗</a></h3>
-      <p>A mutant is a small bug put in on purpose. If every test still passes, that line is unguarded. I wrote tests for four of them, including one where the wallet would add a fee discount instead of subtracting it and overpay.</p>
+      <p>A mutant is a small bug put in on purpose. If every test still passes, that line is unguarded. I wrote tests for three of them, including one where the wallet would add a fee discount instead of subtracting it and overpay.</p>
       <p class="note"><b>Review and iteration:</b> a maintainer asked me to fold my second PR into this one and to show the diff of each mutant. I did both, and two reviewers then confirmed every mutant was killed.</p>
       <p class="note"><b>Takeaway:</b> make a PR easy to check. Show the exact bug the test catches, and keep related work in one place.</p>
       <div class="chips"><span class="chip">C++</span><span class="chip">wallet</span><span class="chip">2 ACKs</span></div></div>
@@ -201,15 +201,15 @@ section{display:flex;flex-direction:column;gap:20px;scroll-margin-top:24px}
 
 <section id="contributions">
   <div class="label">Contributions</div>
-  <p class="prose">18 pull requests opened since September: 11 merged, 6 open, and 1 finished by the maintainer and merged as another PR (#1404). Each row shows the date I opened it.</p>
-  <div class="scroll tl" role="img" aria-label="Timeline from 1 September to 15 November 2026. Pull requests start with one on 12 September, one on 13 October, five on 22 October, then a steady run through 11 November. Reviews cluster on 7 October, 21 to 22 October and 11 November.">
-    <svg viewBox="0 0 640 150">
-      <g stroke="var(--line)"><line x1="90" y1="40" x2="630" y2="40"/><line x1="90" y1="95" x2="630" y2="95"/><line x1="90" y1="128" x2="630" y2="128"/>
+  <p class="prose">19 pull requests opened since September: 12 merged, 6 open, and 1 finished by the maintainer and merged as another PR (#1404). Each row shows the date I opened it.</p>
+  <div class="scroll tl" role="img" aria-label="Timeline from 1 September to 20 November 2026. Pull requests start with one on 12 September, one on 13 October, five on 22 October, then a steady run through 19 November. Reviews cluster on 7 October, 21 to 22 October and 11 November.">
+    <svg viewBox="0 0 680 150">
+      <g stroke="var(--line)"><line x1="90" y1="40" x2="670" y2="40"/><line x1="90" y1="95" x2="670" y2="95"/><line x1="90" y1="128" x2="670" y2="128"/>
         <line x1="90" y1="124" x2="90" y2="132"/><line x1="306" y1="124" x2="306" y2="132"/><line x1="529" y1="124" x2="529" y2="132"/></g>
       <g font-size="11" fill="var(--muted)"><text x="0" y="44">Pull requests</text><text x="0" y="99">Reviews</text></g>
       <g font-size="10" fill="var(--muted)" text-anchor="middle"><text x="90" y="145">1 Sep</text><text x="306" y="145">1 Oct</text><text x="529" y="145">1 Nov</text></g>
       <g fill="var(--accent)">
-        <circle cx="169" cy="40" r="4"/><circle cx="392" cy="40" r="4"/><circle cx="457" cy="40" r="7"/><circle cx="472" cy="40" r="4"/><circle cx="479" cy="40" r="4"/><circle cx="500" cy="40" r="4"/><circle cx="536" cy="40" r="6"/><circle cx="558" cy="40" r="4"/><circle cx="565" cy="40" r="4"/><circle cx="587" cy="40" r="4"/><circle cx="594" cy="40" r="4"/><circle cx="601" cy="40" r="6"/>
+        <circle cx="169" cy="40" r="4"/><circle cx="392" cy="40" r="4"/><circle cx="457" cy="40" r="7"/><circle cx="472" cy="40" r="4"/><circle cx="479" cy="40" r="4"/><circle cx="500" cy="40" r="4"/><circle cx="536" cy="40" r="6"/><circle cx="558" cy="40" r="4"/><circle cx="565" cy="40" r="4"/><circle cx="587" cy="40" r="4"/><circle cx="594" cy="40" r="4"/><circle cx="601" cy="40" r="6"/><circle cx="658" cy="40" r="4"/>
       </g>
       <g fill="var(--amber)"><circle cx="349" cy="95" r="6"/><circle cx="450" cy="95" r="4"/><circle cx="458" cy="95" r="5"/><circle cx="601" cy="95" r="4"/></g>
       <g font-size="10" fill="var(--muted)" text-anchor="middle"><text x="169" y="24">BDK #546</text><text x="392" y="24">fungi #142</text><text x="457" y="20">5 PRs on 22 Oct</text><text x="349" y="80">3 reviews</text></g>
@@ -217,8 +217,9 @@ section{display:flex;flex-direction:column;gap:20px;scroll-margin-top:24px}
   </div>
   <div class="groups">
     <div class="group">
-      <div class="proj-head"><h3><a href="https://github.com/rbitcoin-org/rbitcoin" target="_blank" rel="noopener">rbitcoin</a></h3><span>Rust full node · 10 merged, 1 merged by the maintainer as #1404</span></div>
+      <div class="proj-head"><h3><a href="https://github.com/rbitcoin-org/rbitcoin" target="_blank" rel="noopener">rbitcoin</a></h3><span>Rust full node · 11 merged, 1 merged by the maintainer as #1404</span></div>
       <ul class="prs">
+        <li><span class="n"><a href="https://github.com/rbitcoin-org/rbitcoin/pull/1740" target="_blank" rel="noopener">#1740</a></span><span>Test that Tor, i2pd and cjdroute restarts don't break the node</span><span class="d">19 Nov</span><span class="st merged">merged</span></li>
         <li><span class="n"><a href="https://github.com/rbitcoin-org/rbitcoin/pull/1555" target="_blank" rel="noopener">#1555</a></span><span>Bring I2P sessions back after i2pd restarts</span><span class="d">11 Nov</span><span class="st merged">merged</span></li>
         <li><span class="n"><a href="https://github.com/rbitcoin-org/rbitcoin/pull/1515" target="_blank" rel="noopener">#1515</a></span><span>Bring onion services back after Tor restarts</span><span class="d">10 Nov</span><span class="st merged">merged</span></li>
         <li><span class="n"><a href="https://github.com/rbitcoin-org/rbitcoin/pull/1472" target="_blank" rel="noopener">#1472</a></span><span><code>--proxy</code> uses the same seed rules as a direct start</span><span class="d">9 Nov</span><span class="st merged">merged</span></li>
@@ -259,7 +260,7 @@ section{display:flex;flex-direction:column;gap:20px;scroll-margin-top:24px}
 
 <section id="reviews">
   <div class="label">Reviews</div>
-  <p class="prose">7 pull requests by other people that I reviewed. These are not counted in the 18 above. A tested ACK means I ran the change myself, usually by undoing the fix and checking that the new test fails.</p>
+  <p class="prose">7 pull requests by other people that I reviewed. These are not counted in the 19 above. A tested ACK means I ran the change myself, usually by undoing the fix and checking that the new test fails.</p>
   <ul class="prs">
     <li><span class="n"><a href="https://github.com/bitcoin/bitcoin/pull/36825" target="_blank" rel="noopener">#36825</a></span><span>Core · wallet migration with watch-only transactions<span class="how">Ran both tests with and without the fix: they pass with it and fail without it. Left 2 style nits. <a href="https://github.com/bitcoin/bitcoin/pull/36825#issuecomment-6799626987" target="_blank" rel="noopener">Read my review ↗</a></span></span><span class="d">11 Nov</span><span class="st tack">tACK</span></li>
     <li><span class="n"><a href="https://github.com/bitcoin/bitcoin/pull/36599" target="_blank" rel="noopener">#36599</a></span><span>Core · intermittent timeout waiting for a getdata<span class="how">Added the 99 ms sleep from the description: the old test timed out, the new one passed. <a href="https://github.com/bitcoin/bitcoin/pull/36599#issuecomment-6336159651" target="_blank" rel="noopener">Read my review ↗</a></span></span><span class="d">22 Oct</span><span class="st tack">tACK</span></li>
@@ -314,7 +315,7 @@ section{display:flex;flex-direction:column;gap:20px;scroll-margin-top:24px}
     </ul></div>
     <div><h3>What's next</h3><ul>
       <li>Get my open Bitcoin Core PRs (#36614, #36795, #36840) and Core Lightning #9655 through review.</li>
-      <li>Keep owning Tor, I2P and private broadcast in rbitcoin, starting with restart tests against real Tor and i2pd.</li>
+      <li>Keep owning Tor, I2P, cjdns and private broadcast in rbitcoin.</li>
       <li>Review more Bitcoin Core PRs, always with a tested ACK.</li>
       <li>Write one article for each main piece of work.</li>
     </ul></div>
